@@ -1,3 +1,9 @@
+# Project files
+.env
+.DS_Store
+.keys/
+outputs/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
