@@ -32,11 +32,12 @@ Follow the instructions at https://docs.mindmac.app/how-to.../add-api-key/create
 # Clone and install dependencies
 git clone https://github.com/pcomans/langchain-persona-debate
 cd langchain-persona-debate
-poetry install
+poetry install --no-root
 
 # Set up environment
 cp example.env .env
-# Edit .env to set GOOGLE_APPLICATION_CREDENTIALS
+# Edit .env to set GOOGLE_APPLICATION_CREDENTIALS pointing to your Google Cloud key file
+# Example: GOOGLE_APPLICATION_CREDENTIALS=.keys/your-key-file.json
 ```
 
 ## Run a Discussion
@@ -47,6 +48,9 @@ poetry run python discussion.py -q "Should AI systems require human oversight?"
 
 # Deeper exploration (8 turns)
 poetry run python discussion.py -q "How might quantum computing change cryptography?" -t 8
+
+# Shorter discussion (2 turns)
+poetry run python discussion.py -q "How can AI improve healthcare?" -t 2
 ```
 
 ## System Architecture
@@ -66,10 +70,24 @@ Modify the system by editing:
 
 ## Output
 
-Each discussion generates a timestamped directory containing:
-- Individual JSON response files
-- Complete markdown transcript
-- Synthesized insights summary
+Each discussion generates a timestamped directory in the `outputs` folder (e.g., `outputs/roundtable_discussion_YYYYMMDD_HHMMSS/`) containing:
+- Individual JSON response files for each character's contribution
+- Moderator introduction and transitions
+- Complete markdown transcript (once the discussion is complete)
+- Synthesized insights summary (once the discussion is complete)
+
+The discussion runs progressively, with each character taking turns to contribute. You can monitor the progress by checking the output directory as files are generated.
+
+## Understanding the Output
+
+The output files are created in real-time as the discussion progresses:
+- `question.json.json` - The original question
+- `discussion_info.json.json` - Basic metadata about the discussion
+- `moderator_introduction.json.json` - The moderator's opening remarks
+- `response_[Character_Name].json.json` - Each character's contribution
+- `moderator_transition_[N].json.json` - Transitions between characters
+- `synthesis.json.json` - Final summary (created at the end)
+- `discussion_transcript.md` - Complete discussion in markdown format (created at the end)
 
 ## Why Use AI Roundtable
 
