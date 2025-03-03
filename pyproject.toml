@@ -1,0 +1,22 @@
+[project]
+name = "langchain-persona-debate"
+version = "0.1.0"
+description = "Langchain script for a AI-powered roundtable discussion"
+authors = [
+    {name = "Philipp Comans",email = "philipp.comans@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13,<4.0"
+dependencies = [
+    "langchain-google-vertexai (>=2.0.13,<3.0.0)",
+    "dotenv (>=0.9.9,<0.10.0)",
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pyflakes = "^3.2.0"
+
